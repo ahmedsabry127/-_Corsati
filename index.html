@@ -212,5 +212,25 @@
 <script src="file-manager.js"></script>
 <script src="ui.js"></script>
 <script src="mediaPreviewHandler.js"></script>
+<script>
+// منع كليك يمين
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+}, { passive: false });
+
+// منع الضغط المطول (لمس) لحماية الصور والمحتوى
+let touchTimer = null;
+document.addEventListener('touchstart', function(e) {
+    touchTimer = setTimeout(function() {
+        e.preventDefault();
+    }, 350);
+}, { passive: false });
+document.addEventListener('touchend', function(e) {
+    if (touchTimer) clearTimeout(touchTimer);
+}, { passive: false });
+document.addEventListener('touchmove', function(e) {
+    if (touchTimer) clearTimeout(touchTimer);
+}, { passive: false });
+</script>
 </body>
 </html>
